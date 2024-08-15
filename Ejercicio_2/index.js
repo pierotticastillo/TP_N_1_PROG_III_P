@@ -21,7 +21,7 @@ const getAll = async () => {
 // 2. Recuperar la información de un número limitado de productos (products).
 const getLimited = async (limit) => {
     try {
-        if(limit <= 0 || limit == undefined){
+        if (limit <= 0 || limit == undefined) {
             throw new Error("Esta consulta no es posible");
         }
 
@@ -44,7 +44,9 @@ const getLimited = async (limit) => {
 const createProduct = async (addProduct) => {
     try {
         const response = await fetch(urlApiProducts, {
-            method: "POST",
+            method: "POST", headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify(addProduct)
         });
 
@@ -84,7 +86,9 @@ const getById = async (id) => {
 const deleteProduct = async (id) => {
     try {
         const response = await fetch(`${urlApiProducts}/${id}`, {
-            method: "DELETE"
+            method: "DELETE", headers: {
+                'Content-Type': 'application/json',
+            }
         });
 
         if (!response.ok) {
