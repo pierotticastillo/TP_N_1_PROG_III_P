@@ -1,7 +1,7 @@
 // Config
 const urlApiThrones = 'https://thronesapi.com/api/v2/characters'
 
-const { error } = require("console");
+// const { error } = require("console");
 const fs = require("fs")
 
 // console.log(fs)
@@ -107,7 +107,7 @@ const removeGreaterThan25 = async () => {
         const datos = await fs.promises.readFile("./personajes.json");
 
         const personajesParseados = JSON.parse(datos)
-        
+
         let capturaPersonajes = personajesParseados.filter(personaje => personaje.id <= 25);
 
         const datosParseados = JSON.stringify(capturaPersonajes, null, 2)
@@ -123,31 +123,37 @@ const removeGreaterThan25 = async () => {
 }
 
 // TESTEO
-// 1
-// getCharacter("Ned Stark")
 
-// 2 & 3
-getAll()
+async function main() {
+    // 1
+    await getCharacter("Ned Stark")
 
-// 4
-// readFile()
+    // 2 & 3
+    await getAll()
 
-// a
-// getFamilyStark("House Stark")
+    // 4
+    await readFile()
 
-// b
-// const newCharacter = {
-//     "id": 53,
-//     "firstName": "Leonardo",
-//     "lastName": "da Vinci",
-//     "fullName": "Leonardo da Vinci",
-//     "title": "Artista",
-//     "family": "Italiana",
-// }
+    // a
+    await getFamilyStark("House Stark")
 
-// createCharacter(newCharacter)
+    // b
+    const newCharacter = {
+        "id": 53,
+        "firstName": "Leonardo",
+        "lastName": "da Vinci",
+        "fullName": "Leonardo da Vinci",
+        "title": "Artista",
+        "family": "Italiana",
+    }
+
+    await createCharacter(newCharacter)
 
 
-// c
+    // c
 
-// removeGreaterThan25()
+    await removeGreaterThan25()
+
+}
+
+main()

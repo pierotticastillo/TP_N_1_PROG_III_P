@@ -106,26 +106,32 @@ const deleteProduct = async (id) => {
 
 
 // TESTEO
-// 1
-getAll();
 
-// 2
-getLimited(9);
+const main = async () => {
+    // 1
 
+    getAll();
 
-// 3
-const newProduct = {
-    title: 'test product',
-    price: 13.5,
-    description: 'lorem ipsum set',
-    image: 'https://i.pravatar.cc',
-    category: 'electronic'
-};
-createProduct(newProduct);
+    // 2
+    getLimited(9);
 
 
-// 4
-getById(18);
+    // 3
+    const newProduct = {
+        title: 'test product',
+        price: 13.5,
+        description: 'lorem ipsum set',
+        image: 'https://i.pravatar.cc',
+        category: 'electronic'
+    };
+    createProduct(newProduct);
 
-// 5
-deleteProduct(9)
+
+    // 4
+    getById(18);
+
+    // 5
+    deleteProduct(9)
+
+}
+
