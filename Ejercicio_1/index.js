@@ -51,8 +51,9 @@ const getAll = async () => {
 // 4
 const readFile = async () => {
     try {
-        const characters = await fs.readFileSync("./personajes.json", "utf-8")
-        console.log(characters)
+        const characters = await fs.promises.readFile("./personajes.json", "utf-8")
+        const datosParseados = JSON.parse(characters)
+        console.log(datosParseados)
     }
     catch (error) {
         console.error(error)
@@ -63,7 +64,7 @@ const readFile = async () => {
 const getFamilyStark = async (family) => {
     try {
 
-        const datos = fs.readFileSync("./personajes.json");
+        const datos = await fs.promises.readFile("./personajes.json");
 
         const datosParseados = JSON.parse(datos)
 
@@ -81,7 +82,8 @@ const getFamilyStark = async (family) => {
 
 const createCharacter = async (character) => {
     try {
-        const datos = await fs.readFileSync("./personajes.json");
+
+        const datos = await fs.promises.readFile("./personajes.json");
 
         const personajesParseados = JSON.parse(datos)
 
@@ -91,7 +93,7 @@ const createCharacter = async (character) => {
 
         await fs.promises.writeFile("./personajes.json", datosParseados)
 
-        console.log("El personaje fue creado exitosamente")
+        console.log(`El personaje fue creado exitosamente, sus datos son:\nid: ${character.id}'\nFirst Name:${character.firstName}\nLast Name: ${character.lastName}\nFullname:${character.fullName}\nTitle Family:${character.family}`)
     }
     catch (error) {
         console.error(error)
@@ -102,7 +104,7 @@ const createCharacter = async (character) => {
 // c
 const removeGreaterThan25 = async () => {
     try {
-        const datos = await fs.readFileSync("./personajes.json");
+        const datos = await fs.promises.readFile("./personajes.json");
 
         const personajesParseados = JSON.parse(datos)
         
@@ -114,21 +116,18 @@ const removeGreaterThan25 = async () => {
 
         console.log("Los personajes fueron eliminados exitosamente")
 
-
-
-
     }
     catch (error) {
         console.error(error)
     }
 }
 
-
+// TESTEO
 // 1
 // getCharacter("Ned Stark")
 
 // 2 & 3
-// getAll()
+getAll()
 
 // 4
 // readFile()
@@ -148,6 +147,7 @@ const removeGreaterThan25 = async () => {
 
 // createCharacter(newCharacter)
 
+
 // c
 
-removeGreaterThan25()
+// removeGreaterThan25()
