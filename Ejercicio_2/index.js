@@ -13,7 +13,7 @@ const getAll = async () => {
         console.log(datos);
 
     } catch (error) {
-        response.send(error);
+        console.error(error);
     };
 };
 
@@ -57,7 +57,7 @@ const createProduct = async (addProduct) => {
 
 
     } catch (error) {
-        response.send(error);
+        console.error(error);
     };
 };
 
@@ -76,7 +76,7 @@ const getById = async (id) => {
 
 
     } catch (error) {
-        response.send(error);
+        console.error(error);
     };
 };
 
@@ -96,7 +96,7 @@ const deleteProduct = async (id) => {
 
 
     } catch (error) {
-        response.send(error);
+        console.error(error);
     };
 }
 
