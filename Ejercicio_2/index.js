@@ -54,7 +54,8 @@ const createProduct = async (addProduct) => {
             throw new Error("Error", response.status);
         }
 
-        const datos = await response.json();
+        await response.json();
+
         console.log(`Los datos del producto agregado son:\nTitulo: ${addProduct.title} \nPrecio: ${addProduct.price} \nDescripción: ${addProduct.description} \nCategoria: ${addProduct.category}`);
 
 
@@ -134,4 +135,6 @@ const main = async () => {
     deleteProduct(9)
 
 }
+
+main()
 
