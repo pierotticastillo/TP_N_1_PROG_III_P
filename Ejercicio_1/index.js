@@ -88,7 +88,6 @@ const getFamily = async (family) => {
         if (datosParseados && captura) {
             console.log(`Los personajes de la familia ${family} son:`);
             captura.forEach(personaje => {
-                // console.log(JSON.stringify(personaje, null, 2))
                 console.log(personaje)
             })
         }
