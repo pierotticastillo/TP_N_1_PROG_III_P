@@ -63,7 +63,7 @@ const getAll = async () => {
     };
 };
 
-// 4
+// 4. Leer el archivo local de personajes
 const readFile = async () => {
     try {
         const characters = await promises.readFile("./personajes.json", "utf-8")
@@ -75,7 +75,7 @@ const readFile = async () => {
     }
 }
 
-// a
+// a. Mostrar por consola los personajes de la familia Stark. Es decir: “family” = “House Stark”.
 const getFamily = async (family) => {
     try {
 
@@ -85,14 +85,17 @@ const getFamily = async (family) => {
 
         const captura = datosParseados.filter(personaje => personaje.family == String(family))
 
-        if (captura.length) {
-            console.log(`Los personajes de la familia ${String(family)} son: ${captura}`)
+        if (datosParseados && captura) {
+            console.log(`Los personajes de la familia ${family} son:`);
+            captura.forEach(personaje => {
+                // console.log(JSON.stringify(personaje, null, 2))
+                console.log(personaje)
+            })
         }
         else {
-            console.log(`No se encontraron personajes para la famlia ${String(family)}`)
+            console.log(`No se encontraron personajes para la famlia ${family}`)
         }
 
-        console.log(captura)
     }
     catch (error) {
         console.error(error)
@@ -100,7 +103,7 @@ const getFamily = async (family) => {
 
 }
 
-// b
+// b. Agregar un nuevo personaje y sobrescribir el archivo original.
 
 const createCharacter = async (character) => {
     try {
@@ -109,13 +112,24 @@ const createCharacter = async (character) => {
 
         const personajesParseados = JSON.parse(datos)
 
-        personajesParseados.push(character)
+        const ultimoID = personajesParseados[personajesParseados.length - 1].id
+
+        const newCharacter = {
+            "id": parseInt(ultimoID + 1),
+            "firstName": character.firstName,
+            "lastName": character.lastName,
+            "fullName": character.fullName,
+            "title": character.title,
+            "family": character.family,
+        }
+
+        personajesParseados.push(newCharacter)
 
         const datosParseados = JSON.stringify(personajesParseados, null, 2)
 
         await promises.writeFile("./personajes.json", datosParseados)
 
-        console.log(`El personaje fue creado exitosamente, sus datos son:\nid: ${character.id}'\nFirst Name:${character.firstName}\nLast Name: ${character.lastName}\nFullname:${character.fullName}\nTitle Family:${character.family}`)
+        console.log(`El personaje fue creado exitosamente, sus datos son:\nid: ${ultimoID + 1}'\nFirst Name:${character.firstName}\nLast Name: ${character.lastName}\nFullname:${character.fullName}\nTitle Family:${character.family}`)
     }
     catch (error) {
         console.error(error)
@@ -123,7 +137,8 @@ const createCharacter = async (character) => {
 
 };
 
-// c
+// c. Eliminar los personajes cuyo ID sean mayores a 25 y sobrescribir el archivo original.
+
 const removeGreaterThan = async (id) => {
     try {
         const datos = await promises.readFile("./personajes.json");
@@ -153,6 +168,7 @@ async function main() {
     // 2 & 3
     await getAll()
 
+
     // 4
     await readFile()
 
@@ -160,16 +176,15 @@ async function main() {
     await getFamily("House Stark")
 
     // b
-    // const newCharacter = {
-    //     "id": 53,
-    //     "firstName": "Leonardo",
-    //     "lastName": "da Vinci",
-    //     "fullName": "Leonardo da Vinci",
-    //     "title": "Artista",
-    //     "family": "Italiana",
-    // }
+    const newCharacter = {
+        "firstName": "Leonardo",
+        "lastName": "da Vinci",
+        "fullName": "Leonardo da Vinci",
+        "title": "Artista",
+        "family": "Italiana",
+    }
 
-    // await createCharacter(newCharacter)
+    await createCharacter(newCharacter)
 
 
     // c
