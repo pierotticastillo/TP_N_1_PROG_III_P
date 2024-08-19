@@ -111,10 +111,10 @@ const deleteProduct = async (id) => {
 const main = async () => {
     // 1
 
-    getAll();
+    await getAll();
 
     // 2
-    getLimited(9);
+    await getLimited(9);
 
 
     // 3
@@ -125,14 +125,15 @@ const main = async () => {
         image: 'https://i.pravatar.cc',
         category: 'electronic'
     };
-    createProduct(newProduct);
+    
+    await createProduct(newProduct);
 
 
     // 4
-    getById(18);
+    await getById(18);
 
     // 5
-    deleteProduct(9)
+    await deleteProduct(9)
 
 }
 
