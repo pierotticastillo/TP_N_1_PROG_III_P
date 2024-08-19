@@ -54,9 +54,9 @@ const createProduct = async (addProduct) => {
             throw new Error("Error", response.status);
         }
 
-        await response.json();
+        const idProducto = await response.json();
 
-        console.log(`Los datos del producto agregado son:\nTitulo: ${addProduct.title} \nPrecio: ${addProduct.price} \nDescripción: ${addProduct.description} \nCategoria: ${addProduct.category}`);
+        console.log(`Los datos del producto agregado son:\nID: ${idProducto.id}\nTitulo: ${addProduct.title}\nPrecio: ${addProduct.price}\nDescripción: ${addProduct.description}\nCategoria: ${addProduct.category}`);
 
 
     } catch (error) {
@@ -83,7 +83,7 @@ const getById = async (id) => {
     };
 };
 
-
+// 5. Eliminar un producto (product).
 const deleteProduct = async (id) => {
     try {
         const response = await fetch(`${urlApiProducts}/${id}`, {
@@ -97,7 +97,7 @@ const deleteProduct = async (id) => {
         }
 
         const datos = await response.json();
-        console.log(`Los datos del producto eliminado son:\nTitulo: ${datos.title} \nPrecio: ${datos.price} \nDescripción: ${datos.description} \nCategoria: ${datos.category}`);
+        console.log(`Los datos del producto eliminado son:\nID: ${datos.id}\nTitulo: ${datos.title} \nPrecio: ${datos.price} \nDescripción: ${datos.description} \nCategoria: ${datos.category}`);
 
 
     } catch (error) {
@@ -111,10 +111,10 @@ const deleteProduct = async (id) => {
 const main = async () => {
     // 1
 
-    await getAll();
+    // await getAll();
 
     // 2
-    await getLimited(9);
+    // await getLimited(9);
 
 
     // 3
@@ -125,12 +125,12 @@ const main = async () => {
         image: 'https://i.pravatar.cc',
         category: 'electronic'
     };
-    
+
     await createProduct(newProduct);
 
 
     // 4
-    await getById(18);
+    // await getById(18);
 
     // 5
     await deleteProduct(9)
