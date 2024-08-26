@@ -1,8 +1,8 @@
 // Config
 const urlApiThrones = 'https://thronesapi.com/api/v2/characters'
 
-import fs from "fs";
-import { promises } from "fs";
+const fs = require("fs");
+const promises = require("fs/promises");
 
 
 // 1. Realizar una función que permita recuperar la información del personaje “Ned Stark”.

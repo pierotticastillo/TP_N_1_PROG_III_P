@@ -111,10 +111,10 @@ const deleteProduct = async (id) => {
 const main = async () => {
     // 1
 
-    // await getAll();
+    await getAll();
 
     // 2
-    // await getLimited(9);
+    await getLimited(9);
 
 
     // 3
@@ -130,7 +130,7 @@ const main = async () => {
 
 
     // 4
-    // await getById(18);
+    await getById(18);
 
     // 5
     await deleteProduct(9)
